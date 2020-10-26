@@ -1,9 +1,10 @@
-<%= form_for @song  do |f| %>
+<%= form_for @song do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %><br>
   <%= f.label :artist_name %>
-  <%= f.text_field :artist_name %>
-  <br />
+  <%= f.display_name(@song, @path) %>
+  <%if !params[:artist_id]%>
+  <%= f.collection_check_boxes(:song, :artist_ids, Artist.all, :id, :name) %><br><%end%>
 
   <%= f.submit %>
 <% end %>
